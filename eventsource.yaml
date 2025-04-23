@@ -3,13 +3,21 @@ kind: EventSource
 metadata:
   name: user1-eventsource
 spec:
+  service:
+    ports:
+      - port: 11507
+        targetPort: 11507
+        nodePort: 0
   webhook:
     upload:
+      port: 11507
       endpoint: /upload
       method: POST
     A:
+      port: 11507
       endpoint: /A
       method: POST
     entered:
+      port: 11507
       endpoint: /entered
       method: POST
