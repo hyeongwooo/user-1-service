@@ -1,0 +1,23 @@
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: thumbnail
+  namespace: user1
+spec:
+  template:
+    spec:
+      containers:
+        - image: myrepo/my-image:latest
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: display
+  namespace: user1
+spec:
+  template:
+    spec:
+      containers:
+        - image: myrepo/display-image:v2
+---

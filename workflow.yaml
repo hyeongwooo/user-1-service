@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: user1-workflow-template
+  namespace: user1
+spec:
+  templates:
+  - name: main
+    steps:
+    - - name: thumbnail
+        template: thumbnail
+    - - name: display
+        template: display
+  - name: thumbnail
+    http:
+      url: http://thumbnail.user1.svc.cluster.local
+      method: POST
+      headers:
+      - name: Content-Type
+        value: application/json
+  - name: display
+    http:
+      url: http://display.user1.svc.cluster.local
+      method: POST
+      headers:
+      - name: Content-Type
+        value: application/json

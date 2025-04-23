@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: user1-sensor
+spec:
+  template:
+    serviceAccountName: operate-workflow-sa
+  dependencies:
+    - name: upload
+      eventSourceName: event-source-upload
+      eventName: upload
+    - name: A
+      eventSourceName: event-source-A
+      eventName: A
+    - name: entered
+      eventSourceName: event-source-entered
+      eventName: entered
+  triggers:
+    - template:
+        name: trigger-workflow-0
+        conditions: "upload"
+        argoWorkflow:
+          operation: submit
+          source:
+            resource:
+              apiVersion: argoproj.io/v1alpha1
+              kind: Workflow
+              metadata:
+                generateName: workflow-thumbnail-
+              spec:
+                entrypoint: main
+                workflowTemplateRef:
+                  name: thumbnail-workflow-template
+    - template:
+        name: trigger-workflow-1
+        conditions: "entered"
+        argoWorkflow:
+          operation: submit
+          source:
+            resource:
+              apiVersion: argoproj.io/v1alpha1
+              kind: Workflow
+              metadata:
+                generateName: workflow-display-
+              spec:
+                entrypoint: main
+                workflowTemplateRef:
+                  name: display-workflow-template

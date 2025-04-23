@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: EventSource
+metadata:
+  name: user1-eventsource
+spec:
+  webhook:
+    upload:
+      endpoint: /upload
+      method: POST
+    A:
+      endpoint: /A
+      method: POST
+    entered:
+      endpoint: /entered
+      method: POST
