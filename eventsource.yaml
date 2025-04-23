@@ -5,19 +5,19 @@ metadata:
 spec:
   service:
     ports:
-      - port: 16351
-        targetPort: 16351
+      - port: 11656
+        targetPort: 11656
         nodePort: 0
   webhook:
     upload:
-      port: 16351
+      port: 11656
       endpoint: /upload
       method: POST
     A:
-      port: 16351
+      port: 11656
       endpoint: /A
       method: POST
     entered:
-      port: 16351
+      port: 11656
       endpoint: /entered
       method: POST
