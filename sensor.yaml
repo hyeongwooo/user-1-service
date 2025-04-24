@@ -18,7 +18,7 @@ spec:
   triggers:
     - template:
         name: trigger-workflow-0
-        conditions: "upload"
+        conditions: "upload | A"
         argoWorkflow:
           operation: submit
           source:
